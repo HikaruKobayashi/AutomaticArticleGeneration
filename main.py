@@ -14,6 +14,8 @@ from bs4 import BeautifulSoup
 url = 'https://news.google.com/search'
 keyword = 'COVID-19'
 params = {'hl':'ja', 'gl':'JP', 'ceid':'JP:ja', 'q':keyword}
+article_no = 1
+content = 'コロナウイルスに関するまとめ記事'
 
 # WordPressのデータをsettings.pyから取得する。
 WP_URL = settings.WP_URL
@@ -61,14 +63,35 @@ def post_article(status, slug, title, content, category_ids, tag_ids, media_id):
 res = requests.get(url, params=params)
 soup = BeautifulSoup(res.content, "html.parser")
 
-# レスポンスからh3階層のニュースを1件抽出する
-h3_entry = soup.select_one(".xrnccd")
+# レスポンスからh3階層のニュースを1件抽出する。
+h3_blocks = soup.select(".xrnccd")
 
-# リンク先URLを取得し、整形してフルパスの<a>タグを作る
-h3_link = h3_entry.select_one("h3 a")["href"]
-h3_link = urllib.parse.urljoin(url, h3_link)
-# 投稿内容
-content = '<h2>コロナウイルスに関するまとめ記事</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを5記事まとめました。</p>\n<a href="' + h3_link + '">' + h3_link + '</a>\n<p>本日も「油断大敵」です。元気にいってらっしゃい。</p>\n'
+for i, h3_entry in enumerate(h3_blocks):
+  # 記事を10件取得する。
+  if article_no == 11:
+    break
+
+  # リンク先URLを取得し、整形してフルパスの<a>タグを作る。
+  link = h3_entry.select_one("h3 a")["href"]
+  link = urllib.parse.urljoin(url, link)
+  # 投稿内容
+  # content = '<h2>コロナウイルスに関するまとめ記事</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを5記事まとめました。</p>\n<p><a href="' + h3_link + '">' + h3_link + '</a></p>\n<p>本日も「油断大敵」です。元気にいってらっしゃい。</p>\n'
+  content = content + '<p><a href="' + link + '">' + link + '</a></p>\n'
+  article_no = article_no + 1
+
+  # h3階層のニュースからh4階層のニュースを抽出する
+  h4_block = h3_entry.select_one(".SbNwzf")
+
+  if h4_block != None:
+    # h4階層が存在するときのみニュースを抽出する
+    h4_articles = h4_block.select("article")
+
+    for j, h4_entry in enumerate(h4_articles):
+      link = h4_entry.select_one("h4 a")["href"]
+      link = urllib.parse.urljoin(URL, link)
+
+      content = content + '<p><a href="' + link + '">' + link + '</a></p>\n'
+      article_no = article_no + 1
 
 # 記事を下書き投稿する。（'draft'ではなく、'publish'にすれば公開投稿できます。）
 post_article('draft', 'WordPress-New-Post', '【油断大敵】本日のCOVID-19について最新記事まとめ', content, category_ids=[6], tag_ids=[], media_id=575)
