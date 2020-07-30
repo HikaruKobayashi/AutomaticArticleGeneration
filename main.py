@@ -2,13 +2,20 @@
 import json
 import requests
 import schedule
+import datetime
 import time
 from urllib.parse import urljoin
-from datetime import datetime
 import settings
 import requests
 import urllib
 from bs4 import BeautifulSoup
+
+# パーマリンクを作成する為に日付を取得する。
+dt_now = datetime.datetime.now()
+today = dt_now.strftime('%Y-%m-%d')
+# パーマリンク作成
+permalink = ('coronavirus-news-' + today)
+# print (permalink)
 
 # スクレイピング
 url = 'https://news.google.com/search'
@@ -45,7 +52,7 @@ def post_article(status, slug, title, content, category_ids, tag_ids, media_id):
               "slug": slug,
               "title": title,
               "content": content,
-              "date": datetime.now().isoformat(),
+              "date": datetime.datetime.now().isoformat(),
               "categories": category_ids,
               "tags": tag_ids}
   if media_id is not None:
@@ -93,7 +100,7 @@ for i, h3_entry in enumerate(h3_blocks):
       article_no = article_no + 1
 
 # 記事を下書き投稿する。（'draft'ではなく、'publish'にすれば公開投稿できます。）
-post_article('draft', 'WordPress-New-Post', '【油断大敵】本日のCOVID-19について最新記事まとめ', content, category_ids=[6], tag_ids=[], media_id=575)
+post_article('draft', permalink, '【油断大敵】本日のCOVID-19について最新記事まとめ', content, category_ids=[6], tag_ids=[], media_id=575)
 
 # 定期実行
 # schedule.every(1).minutes.do(job) # 1分ごとに処理を実装する。
