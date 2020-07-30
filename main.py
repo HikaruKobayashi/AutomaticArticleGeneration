@@ -22,7 +22,7 @@ url = 'https://news.google.com/search'
 keyword = 'COVID-19'
 params = {'hl':'ja', 'gl':'JP', 'ceid':'JP:ja', 'q':keyword}
 article_no = 1
-content = '<h2>コロナウイルスに関する記事10選</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを10記事ピックアップしました。</p>'
+content = '<h2>コロナウイルスに関する記事5選</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを5つピックアップしました。</p>'
 
 # WordPressのデータをsettings.pyから取得する。
 WP_URL = settings.WP_URL
@@ -75,7 +75,7 @@ h3_blocks = soup.select(".xrnccd")
 
 for i, h3_entry in enumerate(h3_blocks):
   # 記事を10件取得する。
-  if article_no == 11:
+  if article_no == 6:
     break
 
   # リンク先URLを取得し、整形してフルパスの<a>タグを作る。
