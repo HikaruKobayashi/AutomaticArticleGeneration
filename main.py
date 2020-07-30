@@ -10,6 +10,9 @@ import requests
 import urllib
 from bs4 import BeautifulSoup
 
+# タイトル
+title = '【油断大敵】本日のCOVID-19について最新記事まとめ'
+
 # パーマリンクを作成する為に日付を取得する。
 dt_now = datetime.datetime.now()
 today = dt_now.strftime('%Y-%m-%d')
@@ -100,7 +103,7 @@ for i, h3_entry in enumerate(h3_blocks):
       article_no = article_no + 1
 
 # 記事を下書き投稿する。（'draft'ではなく、'publish'にすれば公開投稿できます。）
-post_article('draft', permalink, '【油断大敵】本日のCOVID-19について最新記事まとめ', content, category_ids=[6], tag_ids=[], media_id=575)
+post_article('draft', permalink, title, content, category_ids=[6], tag_ids=[], media_id=575)
 
 # 定期実行
 # schedule.every(1).minutes.do(job) # 1分ごとに処理を実装する。
