@@ -26,6 +26,7 @@ keyword = 'COVID-19'
 params = {'hl':'ja', 'gl':'JP', 'ceid':'JP:ja', 'q':keyword}
 article_no = 1
 content = '<h2>コロナウイルスに関する記事5選</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを5つピックアップしました。</p>'
+conclusion = '<p>いかかでしたでしょうか。少しでもご自分の健康を守るための参考になればと思います。</p>\n<p>今日も「油断大敵」を忘れずに元気に過ごしてください。</p>'
 
 # WordPressのデータをsettings.pyから取得する。
 WP_URL = settings.WP_URL
@@ -103,7 +104,7 @@ for i, h3_entry in enumerate(h3_blocks):
       article_no = article_no + 1
 
 # 記事を下書き投稿する。（'draft'ではなく、'publish'にすれば公開投稿できます。）
-post_article('draft', permalink, title, content, category_ids=[6], tag_ids=[], media_id=575)
+post_article('draft', permalink, title, content+conclusion, category_ids=[6], tag_ids=[], media_id=575)
 
 # 定期実行
 # schedule.every(1).minutes.do(job) # 1分ごとに処理を実装する。
