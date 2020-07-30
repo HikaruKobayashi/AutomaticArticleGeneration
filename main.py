@@ -104,7 +104,7 @@ for i, h3_entry in enumerate(h3_blocks):
       article_no = article_no + 1
 
 # 記事を下書き投稿する。（'draft'ではなく、'publish'にすれば公開投稿できます。）
-post_article('draft', permalink, title, content+conclusion, category_ids=[6], tag_ids=[], media_id=575)
+post_article('publish', permalink, title, content+conclusion, category_ids=[6], tag_ids=[], media_id=575)
 
 # 定期実行
 # schedule.every(1).minutes.do(job) # 1分ごとに処理を実装する。
