@@ -15,7 +15,7 @@ url = 'https://news.google.com/search'
 keyword = 'COVID-19'
 params = {'hl':'ja', 'gl':'JP', 'ceid':'JP:ja', 'q':keyword}
 article_no = 1
-content = 'コロナウイルスに関するまとめ記事'
+content = '<h2>コロナウイルスに関する記事10選</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを10記事ピックアップしました。</p>'
 
 # WordPressのデータをsettings.pyから取得する。
 WP_URL = settings.WP_URL
@@ -75,7 +75,6 @@ for i, h3_entry in enumerate(h3_blocks):
   link = h3_entry.select_one("h3 a")["href"]
   link = urllib.parse.urljoin(url, link)
   # 投稿内容
-  # content = '<h2>コロナウイルスに関するまとめ記事</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを5記事まとめました。</p>\n<p><a href="' + h3_link + '">' + h3_link + '</a></p>\n<p>本日も「油断大敵」です。元気にいってらっしゃい。</p>\n'
   content = content + '<p><a href="' + link + '">' + link + '</a></p>\n'
   article_no = article_no + 1
 
