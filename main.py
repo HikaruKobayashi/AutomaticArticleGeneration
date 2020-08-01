@@ -1,7 +1,6 @@
 # coding=utf-8 文字コード
 import json
 import requests
-import schedule
 import datetime
 import time
 from urllib.parse import urljoin
@@ -25,7 +24,7 @@ url = 'https://news.google.com/search'
 keyword = 'COVID-19'
 params = {'hl':'ja', 'gl':'JP', 'ceid':'JP:ja', 'q':keyword}
 article_no = 1
-content = '<h2>コロナウイルスに関する記事5選</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを5つピックアップしました。</p>'
+content = '<h2>コロナウイルスに関する記事5選</h2>\n<p>こんにちは。本日もコロナウイルスに関するニュースを5つピックアップしました。</p>'
 conclusion = '<p>いかかでしたでしょうか。少しでもご自分の健康を守るための参考になればと思います。</p>\n<p>今日も「油断大敵」を忘れずに元気に過ごしてください。</p>'
 
 # WordPressのデータをsettings.pyから取得する。
@@ -66,7 +65,6 @@ def post_article(status, slug, title, content, category_ids, tag_ids, media_id):
                     data=json.dumps(payload),
                     headers={'Content-type': "application/json"},
                     auth=(user_, pass_))
-  # print('----------\n件名:「{}」の投稿リクエスト結果:{} res.status: {}'.format(title, result, repr(res.status_code)))
   print("Sucess!")
   return res
 
@@ -103,5 +101,5 @@ for i, h3_entry in enumerate(h3_blocks):
       content = content + '<p><a href="' + link + '">' + link + '</a></p>\n'
       article_no = article_no + 1
 
-# 記事を下書き投稿する。（'draft'ではなく、'publish'にすれば公開投稿できます。）
+# 記事を投稿する。（'draft':下書き、'publish':公開投稿）
 post_article('publish', permalink, title, content+conclusion, category_ids=[6], tag_ids=[], media_id=575)
