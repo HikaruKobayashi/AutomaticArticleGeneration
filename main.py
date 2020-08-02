@@ -24,7 +24,7 @@ url = 'https://news.google.com/search'
 keyword = 'COVID-19'
 params = {'hl':'ja', 'gl':'JP', 'ceid':'JP:ja', 'q':keyword}
 article_no = 1
-content = '<h2>コロナウイルスに関する記事5選</h2>\n<p>こんにちは。本日もコロナウイルスに関するニュースを5つピックアップしました。</p>'
+content = '<h2>コロナウイルスに関する記事5選</h2>\n<p>おはようございます。本日もコロナウイルスに関するニュースを5つピックアップしました。</p>'
 conclusion = '<p>いかかでしたでしょうか。少しでもご自分の健康を守るための参考になればと思います。</p>\n<p>今日も「油断大敵」を忘れずに元気に過ごしてください。</p>'
 
 # WordPressのデータをsettings.pyから取得する。
