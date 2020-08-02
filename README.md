@@ -5,3 +5,4 @@
 ## 開発に使用した技術
 - Python
 - Wordpress API
+- crontab
