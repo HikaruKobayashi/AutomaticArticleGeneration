@@ -76,7 +76,7 @@ soup = BeautifulSoup(res.content, "html.parser")
 h3_blocks = soup.select(".xrnccd")
 
 for i, h3_entry in enumerate(h3_blocks):
-  # 記事を10件取得する。
+  # 記事を5件取得する。
   if article_no == 6:
     break
 
