@@ -17,7 +17,6 @@ dt_now = datetime.datetime.now()
 today = dt_now.strftime('%Y-%m-%d')
 # パーマリンク作成
 permalink = ('coronavirus-news-' + today)
-# print (permalink)
 
 # スクレイピング
 url = 'https://news.google.com/search'
@@ -31,10 +30,6 @@ conclusion = '<p>いかかでしたでしょうか。少しでもご自分の健
 WP_URL = settings.WP_URL
 WP_USERNAME = settings.WP_USERNAME
 WP_PASSWORD = settings.WP_PASSWORD
-# .envにデータが入っているか確認する。
-# print(settings.WP_URL)
-# print(settings.WP_USERNAME)
-# print(settings.WP_PASSWORD)
 
 def post_article(status, slug, title, content, category_ids, tag_ids, media_id):
   """
